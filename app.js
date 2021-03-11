@@ -30,27 +30,29 @@ guessBtn.addEventListener('click', function() {
   // Validate the input
   if(isNaN(guess) || guess < min || guess > max) {
     setMessage(`Please enter a number between ${min} and ${max}`, 'red');
-  }
-
-  // Check if right number
-  if(guess === winningNum) {
-    gameOver(true, `Congratulations! You have won! ${winningNum} is the number! You had ${guessesLeft} ${guessMessage(guessesLeft)} remaining!`)
   } else {
-    guessesLeft -= 1;
-    if(guessesLeft === 0) {
-      gameOver(false, `Game over man! The correct number was ${winningNum}`)
+    if(guess === winningNum) {
+      gameOver(true, `Congratulations! You have won! ${winningNum} is the number! You had ${guessesLeft} ${guessMessage(guessesLeft)} remaining!`)
     } else {
-      if(guess < winningNum) {
-        guessInput.style.borderColor = 'red';
-        guessInput.value = '';
-        setMessage(`Your guess, ${guess} is lower than the winning number. You have ${guessesLeft} ${guessMessage(guessesLeft)} left`, 'red');
+      guessesLeft -= 1;
+      if(guessesLeft === 0) {
+        gameOver(false, `Game over man! The correct number was ${winningNum}`)
       } else {
-        guessInput.style.borderColor = 'red';
-        guessInput.value = '';
-        setMessage(`Your guess, ${guess} is higher than the winning number. You have ${guessesLeft} ${guessMessage(guessesLeft)} left`, 'red');
+        if(guess < winningNum) {
+          guessInput.style.borderColor = 'red';
+          guessInput.value = '';
+          setMessage(`Your guess, ${guess} is lower than the winning number. You have ${guessesLeft} ${guessMessage(guessesLeft)} left`, 'red');
+        } else {
+          guessInput.style.borderColor = 'red';
+          guessInput.value = '';
+          setMessage(`Your guess, ${guess} is higher than the winning number. You have ${guessesLeft} ${guessMessage(guessesLeft)} left`, 'red');
+        }
       }
     }
   }
+
+  // Check if right number
+  
 });
 
 function setMessage(msg, color) {
